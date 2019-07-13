@@ -8,7 +8,10 @@
         <el-breadcrumb-item>活动详情</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <router-view style="margin-top：10px"></router-view>
+     <transition name="el-fade-in">
+       <router-view style="margin-top：10px"></router-view>
+     </transition>
+    
   </div>
 </template>
 <script>
