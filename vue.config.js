@@ -4,7 +4,7 @@ module.export = {
     disableHostCheck: true,
     proxy: {
       '^/api': {
-        target: 'fmpsit.cnsuning.com',
+        target: '',
         ws: true,
         changeOrigin: true
       }
