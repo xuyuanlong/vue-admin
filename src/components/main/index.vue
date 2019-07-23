@@ -9,6 +9,9 @@
           <Aside></Aside>
         </el-aside>
         <el-main class="main-content">
+              <div class="bread">
+                <Breadcrumb></Breadcrumb>
+              </div>
           <Main></Main>
         </el-main>
       </el-container>
@@ -19,12 +22,14 @@
 import Header from './Header';
 import Main from './Main';
 import Aside from './Aside';
+import Breadcrumb from './Breadcrumb';
 
 export default {
   components: {
     Header,
     Main,
-    Aside
+    Aside,
+    Breadcrumb
   },
   data() {
     return {
@@ -39,6 +44,11 @@ export default {
 <style >
   .el-header {
     padding:0 !important
+  }
+    .bread {
+    padding: 15px 0;
+    text-align: left;
+    background: #eee;
   }
   .el-main {
     padding: 0 20px !important;

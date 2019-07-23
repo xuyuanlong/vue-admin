@@ -1,7 +1,7 @@
 <template>
   <el-menu
     class="el-menu-vertical-demo main-menu" >
-    <div :key="item.code" v-for="item in leftList">
+    <div :key="item.code" v-for="item in navList">
         <template v-if="!item.meta">
           <el-submenu v-if="item.children" :index="item.code">
             <template slot="title">
@@ -21,34 +21,21 @@
   </el-menu>
 </template>
 <script>
+import { constants } from 'crypto';
+import { mapState } from 'vuex'
 export default {
   data(){
     return{
-      leftList:[{
-        path:'/',
-        name: '首页',
-        meta: {
-          hideMenu:true
-        }
-      },{
-        path:'user',
-        name:'用户管理',
-        code: '0011',
-        children:[{
-          path:'/userList',
-          code: '001',
-          name:'用户列表'
-        },{
-          path:'/userAdd',
-          code: '002',
-          name:'创建用户'
-        }]
-      },{
-        path: '/about',
-        code:'003',
-        name:'关于我们'
-      }]
+      
     }
+  },
+  computed:{
+    ...mapState({
+      navList: state => state.navList,
+    })
+  },
+  mounted() {
+    
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -58,7 +45,6 @@ export default {
       // console.log(key, keyPath);
     },
     toMain(path) {
-      console.log(path)
       this.$router.push(path)
     }
   }

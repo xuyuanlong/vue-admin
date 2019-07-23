@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
-import store from './store'
+import store from './store/store'
 import ElementUI from 'element-ui'
 import axios from 'axios'
 import { Loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$http = axios;
+
 Vue.use(ElementUI)
-const Main = new Vue({
+const vmMain = new Vue({
   router,
   store,
   render: h => h(App)
@@ -20,22 +23,21 @@ let needLoadingRequestCount = 0 // 声明一个对象用于存储请求个数
 
 let loadingInstance;
 const options = {
-  // target: document.getElementsByClassName('main-content'),
+  target: 'main-content',
 }
 
 function startLoading () {
-  loadingInstance = Loading.service(options)
-  // loading = Vue.prototype.$loading({
-  //   lock: true,
-  //   text: '加载中...',
-  //   background: 'rgba(0,0,0,0.5)',
-  //   target: document.querySelector('body') // 设置加载动画区域
-  // })
+  loadingInstance = Loading.service({
+    // target: '.main-content',
+    lock: true,
+    background: 'rgba(0,0,0,0.3)',
+    text: '加载中...',
+  })
 }
 
 function endLoading () {
   // loading.close()
-  Main.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+  vmMain.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
     loadingInstance.close();
   });
 }
@@ -76,7 +78,7 @@ axios.interceptors.response.use(data => {
   hideLoading()
   let _status = error.response && error.response.status
   if (_status === 504 || _status === 404) {
-    Main.$message.error({
+    vmMain.$message.error({
       message: '数据请求异常',
       center: true
     });
@@ -84,5 +86,4 @@ axios.interceptors.response.use(data => {
   }
   return Promise.reject(error)
 })
-Vue.prototype.$http = axios;
 

@@ -1,7 +1,6 @@
 <template>
   <div>
-      新增用户
-      <button @click="goList()">去LIst</button>
+      首页
   </div>
 </template>
 <script>
@@ -12,9 +11,7 @@ export default {
     }
   },
   methods: {
-    goList() {
-      this.$router.push('/userList')
-    }
+    
   }
 }
 </script>
