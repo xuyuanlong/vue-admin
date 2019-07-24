@@ -5,7 +5,7 @@
         <div style="text-align:left;margin-left:20px;"><img src="../../assets/index/logo.png" alt="logo"></div>
       </el-col>
           
-      <el-col :offset="6" :span="5" >
+      <el-col :offset="4" :span="8" >
           <span class="mar5"><i class="el-icon-setting"></i>系统设置</span>
           <span class="mar5">|</span>
           <div class="headImg" ></div>
