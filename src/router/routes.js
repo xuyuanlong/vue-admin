@@ -22,10 +22,10 @@ const routes = [
     }]
   },
   {
-    path:'/userManage',
+    path:'/user',
     component: Main,
     children:[{
-        path:'/user/userDetail',
+        path:'/user/userList/userDetail',
         name:'用户详情',
         component: UserDetail
       }]
