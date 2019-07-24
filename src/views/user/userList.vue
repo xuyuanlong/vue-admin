@@ -57,7 +57,7 @@
     },
     methods: {
       handleEdit(index, row) {
-        this.$router.push('/userDetail')
+        this.$router.push('/user/userDetail')
         console.log(index, row);
       },
       handleDelete(index, row) {

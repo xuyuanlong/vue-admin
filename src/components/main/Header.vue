@@ -11,7 +11,7 @@
           <div class="headImg" ></div>
           <span class="mar5">张三</span>
           <span class="mar5">|</span>
-          <span class="exitBtn"><i class="el-icon-switch-button"></i>退出</span>
+          <span class="exitBtn" @click="exit"><i class="el-icon-switch-button"></i>退出</span>
           
       </el-col>
     </el-row>
@@ -24,7 +24,13 @@ export default {
     return {
     }
   },
+  computed:{
+    
+  },
   methods: {
+    exit() {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

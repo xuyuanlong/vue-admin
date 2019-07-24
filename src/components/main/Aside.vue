@@ -3,18 +3,18 @@
     class="el-menu-vertical-demo main-menu" >
     <div :key="item.code" v-for="item in navList">
         <template v-if="!item.meta">
-          <el-submenu v-if="item.children" :index="item.code">
+          <el-submenu v-if="item.children && item.name" :index="item.name">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>{{item.name}}</span>
             </template>
             <el-menu-item-group  >
-              <el-menu-item @click="toMain(item2.path)" :key="item2.code" v-for="item2 in item.children" :index="item2.code">{{item2.name}}</el-menu-item>
+              <el-menu-item @click="toMain(item2.path)" :key="item2.name" v-for="item2 in item.children" :index="item2.code">{{item2.name}}</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item v-else @click="toMain(item.path)" :index="item.code">
+          <el-menu-item v-else @click="toMain(item.children[0].path)" :index="item.children[0].name">
             <i class="el-icon-menu"></i>
-            <span slot="title">{{item.name}}</span>
+            <span slot="title">{{item.children[0].name}}</span>
           </el-menu-item>
         </template>
     </div>
@@ -23,6 +23,7 @@
 <script>
 import { constants } from 'crypto';
 import { mapState } from 'vuex'
+import { log } from 'util';
 export default {
   data(){
     return{
@@ -35,7 +36,6 @@ export default {
     })
   },
   mounted() {
-    
   },
   methods: {
     handleOpen(key, keyPath) {

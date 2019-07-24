@@ -6,6 +6,8 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 import { Loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+import Main from './components/main/index.vue'
+
 
 Vue.config.productionTip = false
 
@@ -36,7 +38,6 @@ function startLoading () {
 }
 
 function endLoading () {
-  // loading.close()
   vmMain.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
     loadingInstance.close();
   });
@@ -86,4 +87,5 @@ axios.interceptors.response.use(data => {
   }
   return Promise.reject(error)
 })
+
 
