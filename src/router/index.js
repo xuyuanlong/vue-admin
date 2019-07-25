@@ -29,6 +29,7 @@ router.beforeEach((to,from,next)=>{
   } else {
     next()
   }
+  next()
 })
 
 function routerGo(to, next) {

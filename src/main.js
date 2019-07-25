@@ -58,7 +58,7 @@ function hideLoading () {
  
 // axios
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : '' // 接口基础路径
-axios.defaults.timeout = 20000 // 超时时间 20s
+axios.defaults.timeout = 10000 // 超时时间 10s
 axios.defaults.withCredentials = true // 允许设置cookie(开启的话需后端配置)
 // http请求拦截器
 axios.interceptors.request.use(config => {
@@ -77,15 +77,13 @@ axios.interceptors.response.use(data => {
   return data
 }, error => {
   hideLoading()
-  let _status = error.response && error.response.status
+  let _status = error.response && error.response.status;
   if (_status === 504 || _status === 404) {
     vmMain.$message.error({
       message: '数据请求异常',
       center: true
     });
-    
   }
   return Promise.reject(error)
 })
-
 
