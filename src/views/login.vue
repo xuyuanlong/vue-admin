@@ -10,11 +10,12 @@ import { log } from 'util';
 export default {
   data(){
     return{
-      myRouteArr:[]
     }
   },
   methods:{
     login() {
+      log(123)
+      localStorage.setItem('romoteRoutes','');
       this.$router.push('/')
     },
   }

@@ -4,27 +4,26 @@ import routes from './routes'
 import axios from 'axios';
 import store from '../store/store'
 import Main from '../components/main/index.vue'
-
+const notFound = ()=> import('@/views/404.vue')
 Vue.use(Router)
 
 const router =  new Router({
-  mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes,
 })
 
-var getRoutes;
+var remoteRoutes;
 router.beforeEach((to,from,next)=>{
-  if (!getRoutes) {
-    if (!getLocalRoutes()) {
+  if (!remoteRoutes) {
+    if (!getRomoteRoutes()) {
       axios.post('https://www.easy-mock.com/mock/5d36779da5ab5f6106d524a1/api/menuList').then((res)=>{
-        getRoutes = res.data.data;
-        
-        setLocalRoutes(getRoutes) //存储路由到localStorage
+        remoteRoutes = res.data.data;
+        setRomoteRoutes(remoteRoutes) //存储路由到localStorage
         routerGo(to, next)//执行路由跳转方法
       })
     } else {
-      getRoutes = getLocalRoutes()
+      remoteRoutes = getRomoteRoutes()
       routerGo(to, next)//执行路由跳转方法
     }
   } else {
@@ -34,30 +33,36 @@ router.beforeEach((to,from,next)=>{
 
 function routerGo(to, next) {
    //过滤路由
-  let handleRouter = filterAsyncRouter(getRoutes)
-  console.log(handleRouter)
-  router.addRoutes(handleRouter) //动态添加路由
+  let getFilterRoutes = filterAsyncRouter(remoteRoutes)
+  router.addRoutes(getFilterRoutes) //动态添加路由
+  router.addRoutes([{
+    path:'*',
+    name:'404',
+    component:notFound
+  }])
   store.commit('setNavList',{
-    navList:handleRouter
+    navList:getFilterRoutes
   })
+  console.log(router)
   next({ ...to, replace: true })
 }
 
-function setLocalRoutes(data) {
-  localStorage.setItem('localRoutes',JSON.stringify(data))
+function setRomoteRoutes(data) {
+  localStorage.setItem('romoteRoutes',JSON.stringify(data))
 }
-
-function getLocalRoutes() {
-  return JSON.parse(localStorage.getItem('localRoutes'))
+function getRomoteRoutes() {
+  if (localStorage.getItem('romoteRoutes')) {
+    return JSON.parse(localStorage.getItem('romoteRoutes'))
+  }
+  return '';
+  
 }
 function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符串，转换为组件对象
-  const accessedRouters = asyncRouterMap.filter((route) => {
-    if (route.component) {
-      if (route.component === 'Main') {
-        route.component = Main
-      } else {
-        route.component = ()=>import(`@/views${route.path}.vue`)
-      }
+  let accessedRouters = asyncRouterMap.filter((route) => {
+    if (route.component && route.component === 'Main') {
+      route.component = Main
+    } else {
+      route.component = ()=>import(`@/views${route.path}.vue`)
     }
     if (route.children && route.children.length) {
       route.children = filterAsyncRouter(route.children)

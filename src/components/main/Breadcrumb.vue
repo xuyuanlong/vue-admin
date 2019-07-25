@@ -38,10 +38,22 @@ export default {
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
-      const first = matched[0]
       if (!first.name || first.name != '首页') {
-        matched = [{ path: '/index', name: '首页'}].concat(matched)
+        if (first.meta && first.meta.pathName) {
+          let pathNameArr = first.meta.pathName.split('-');
+          matched = [{ path: '/index', name: '首页'}]
+          for (let i=0;i<pathNameArr.length;i++) {
+            let pathObj = {
+              path: i,
+              name: pathNameArr[i]
+            }
+            matched.push(pathObj)
+          }
+        } else {
+          matched = [{ path: '/index', name: '首页'}].concat(matched)
+        }
       }
+      
       this.levelList = matched.filter(item => item)
     },
   }

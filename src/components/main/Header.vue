@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     exit() {
+      localStorage.setItem('romoteRoutes','')
       this.$router.push('/login')
     }
   }

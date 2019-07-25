@@ -25,9 +25,12 @@ const routes = [
     path:'/user',
     component: Main,
     children:[{
-        path:'/user/userList/userDetail',
+        path:'/user/userDetail',
         name:'用户详情',
-        component: UserDetail
+        component: UserDetail,
+        meta: {
+          pathName:'用户管理-用户列表-用户详情',
+        }
       }]
   },
     // {
@@ -59,8 +62,6 @@ const routes = [
     //     component: () => import('../views/about.vue')
     //   }]
     // }
-
-
   ]
 export default  routes;
 
