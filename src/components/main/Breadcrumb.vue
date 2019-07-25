@@ -38,6 +38,7 @@ export default {
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
+      const first = matched[0];
       if (!first.name || first.name != '首页') {
         if (first.meta && first.meta.pathName) {
           let pathNameArr = first.meta.pathName.split('-');
