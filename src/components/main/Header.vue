@@ -1,18 +1,18 @@
 <template>
   <div class="header">
-    <el-row type='flex' style="height:60px" align='middle'>
+    <el-row type='flex' justify="space-between" style="height:60px" align='middle'>
       <el-col :span="12">
         <div style="text-align:left;margin-left:20px;"><img src="../../assets/index/logo.png" alt="logo"></div>
       </el-col>
           
-      <el-col :offset="4" :span="8" >
+      <el-col :span="12" style="text-align:right;padding-right:20px;">
+          
           <span class="mar5"><i class="el-icon-setting"></i>系统设置</span>
           <span class="mar5">|</span>
           <div class="headImg" ></div>
           <span class="mar5">张三</span>
           <span class="mar5">|</span>
           <span class="exitBtn" @click="exit"><i class="el-icon-switch-button"></i>退出</span>
-          
       </el-col>
     </el-row>
   </div>

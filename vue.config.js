@@ -16,47 +16,24 @@ module.exports = {
     //   }
     // }
   },
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.vue$/,
-  //       loader: 'vue-loader',
-  //       options: {
-  //         // vue-loader options go here
-  //       }
-  //     }
-  //   ]
-  // }
-  chainWebpack(config) {
-    // config.plugins.delete('preload') // TODO: need test
-    // config.plugins.delete('prefetch') // TODO: need test
+	configureWebpack: {
+    //关闭 webpack 的性能提示
+    performance: {
+      hints:false
+    },
+    //警告 webpack 的性能提示
+    performance: {
+      hints:'warning',
+      //入口起点的最大体积
+      maxEntrypointSize: 50000000,
+      //生成文件的最大体积
+      maxAssetSize: 30000000,
+      //只给出 js 文件的性能提示
+      assetFilter: function(assetFilename) {
+        return assetFilename.endsWith('.js');
+      }
+    }
 
-    // // set svg-sprite-loader
-    // config.module
-    //   .rule('svg')
-    //   .exclude.add(resolve('src/icons'))
-    //   .end()
-    // config.module
-    //   .rule('icons')
-    //   .test(/\.svg$/)
-    //   .include.add(resolve('src/icons'))
-    //   .end()
-    //   .use('svg-sprite-loader')
-    //   .loader('svg-sprite-loader')
-    //   .options({
-    //     symbolId: 'icon-[name]'
-    //   })
-    //   .end()
-
-    // set preserveWhitespace
-    config.module
-      .rule('vue')
-      .use('vue-loader')
-      .loader('vue-loader')
-      .tap(options => {
-        options.compilerOptions.preserveWhitespace = true
-        return options
-      })
-      .end()
   }
+
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="main" id="main">
-     <!-- <transition name="fade"> -->
+     <transition :name="transitionName">
        <router-view style="margin-top：10px"></router-view>
-     <!-- </transition> -->
+     </transition>
     
   </div>
 </template>
@@ -11,6 +11,14 @@
 export default {
   data() {
     return {
+      transitionName:''
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     }
   },
   methods: {
