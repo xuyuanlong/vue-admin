@@ -5,13 +5,13 @@
         <Header></Header>
       </el-header>
       <el-container>
-        <el-aside width="201px">
+        <el-aside style="width:auto;">
           <Aside></Aside>
         </el-aside>
         <el-main class="main-content">
-              <div class="bread">
-                <Breadcrumb></Breadcrumb>
-              </div>
+          <div class="bread">
+            <Breadcrumb></Breadcrumb>
+          </div>
           <Main></Main>
         </el-main>
       </el-container>
@@ -45,7 +45,11 @@ export default {
   .el-header {
     padding:0 !important
   }
-    .bread {
+  .bread {
+    position: fixed;
+    top:60px;
+    width: 100%;
+    z-index: 999;
     padding: 15px 0;
     text-align: left;
     background: #eee;

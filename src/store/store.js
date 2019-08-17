@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    navList: []
+    navList: [],
+    slideOpen:true
   },
   mutations: {
     setNavList(state,payload) {
       state.navList = payload.navList
+    },
+    setSlideStatus(state,payload) {
+      state.slideOpen = payload
     }
   },
   actions: {

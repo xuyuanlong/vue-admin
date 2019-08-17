@@ -3,7 +3,6 @@
      <transition :name="transitionName">
        <router-view style="margin-top：10px"></router-view>
      </transition>
-    
   </div>
 </template>
 <script>
@@ -30,6 +29,7 @@ export default {
   .main{
     background: #fff;
     height: 100%;
+    padding-top: 60px; 
   }
 
   .fade-enter {

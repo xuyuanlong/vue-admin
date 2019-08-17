@@ -3,18 +3,18 @@ module.exports = {
   lintOnSave:false,   //取消编译代码格式校验
   devServer: {
     open: true,
-    port: '8080',
-    // proxy: {
-    //   '^/api': {
-    //     target: 'http://10.48.17.83:8010',
-    //     ws: true,
-    //     changeOrigin: true,
-    //     open: true, //配置自动启动浏览器
-    //     pathRewrite: {
-    //       '^/api': ''
-    //     }
-    //   }
-    // }
+    port: '8081',
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:8080',
+        ws: true,
+        changeOrigin: true,
+        open: true, //配置自动启动浏览器
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
   },
 	configureWebpack: {
     //关闭 webpack 的性能提示

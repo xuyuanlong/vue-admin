@@ -74,7 +74,17 @@ axios.interceptors.request.use(config => {
 // http响应拦截器
 axios.interceptors.response.use(data => {
   hideLoading() // 响应成功关闭loading
-  return data
+  if (data.data.code == 4) {
+    vmMain.$router.replace('/login')
+  } else {
+    if (data.data.code !== 0) {
+      vmMain.$message.error({
+        message: data.data.codemsg,
+        center: true
+      });
+    }
+  }
+  return data;
 }, error => {
   hideLoading()
   let _status = error.response && error.response.status;

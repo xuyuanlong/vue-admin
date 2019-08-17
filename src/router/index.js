@@ -15,23 +15,26 @@ const router =  new Router({
 
 var remoteRoutes;
 router.beforeEach((to,from,next)=>{
-  if (!remoteRoutes) {
-    if (!getRomoteRoutes()) {
-      axios.post('https://www.easy-mock.com/mock/5d36779da5ab5f6106d524a1/api/menuList').then((res)=>{
-        remoteRoutes = res.data.data;
-        setRomoteRoutes(remoteRoutes) //存储路由到localStorage
-        routerGo(to, next)//执行路由跳转方法
-      })
-    } else {
-      remoteRoutes = getRomoteRoutes()
-      routerGo(to, next)//执行路由跳转方法
-    }
-  } else {
-    next()
-  }
+  // if (!remoteRoutes) {
+  //   if (!getRomoteRoutes()) {
+  //     axios.post('/api/menu/list').then((res)=>{
+  //       remoteRoutes = res.data.data;
+  //       setRomoteRoutes(remoteRoutes) //存储路由到localStorage
+  //       routerGo(to, next)//执行路由跳转方法
+  //     })
+  //   } else {
+  //     remoteRoutes = getRomoteRoutes()
+  //     routerGo(to, next)//执行路由跳转方法
+  //   }
+  // } else {
+  //   next()
+  // }
   next()
 })
 
+ store.commit('setNavList',{
+    navList: routes
+  })
 function routerGo(to, next) {
    //过滤路由
   let getFilterRoutes = filterAsyncRouter(remoteRoutes)
@@ -44,7 +47,6 @@ function routerGo(to, next) {
   store.commit('setNavList',{
     navList:getFilterRoutes
   })
-  console.log(router)
   next({ ...to, replace: true })
 }
 
@@ -55,8 +57,6 @@ function getRomoteRoutes() {
   if (localStorage.getItem('romoteRoutes')) {
     return JSON.parse(localStorage.getItem('romoteRoutes'))
   }
-  return '';
-  
 }
 function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符串，转换为组件对象
   let accessedRouters = asyncRouterMap.filter((route) => {
@@ -70,7 +70,6 @@ function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符
     }
     return true
   })
-
   return accessedRouters;
 }
 export default router
