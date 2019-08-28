@@ -32,8 +32,12 @@ router.beforeEach((to,from,next)=>{
   next()
 })
 
+let menuRoutes = routes.filter(function(item) {
+  return !item.hidden
+})
+console.log(menuRoutes)
  store.commit('setNavList',{
-    navList: routes
+    navList: menuRoutes
   })
 function routerGo(to, next) {
    //过滤路由

@@ -29,7 +29,6 @@ export default {
   .main{
     background: #fff;
     height: 100%;
-    padding-top: 60px; 
   }
 
   .fade-enter {

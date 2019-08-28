@@ -1,16 +1,11 @@
 <template>
   <el-breadcrumb separator-class="el-icon-arrow-right">
     <el-breadcrumb-item v-for="item in levelList" :key="item.path">
-      <!-- v-if="item.redirect==='noRedirect'||index==levelList.length-1" -->
         <span  class="no-redirect">{{ item.name }}</span>
-        <!-- <a v-else>{{ item.name }}</a> -->
       </el-breadcrumb-item>
   </el-breadcrumb>
-
 </template>
-
 <script>
-import { constants } from 'crypto';
 
 export default {
   data() {
@@ -45,7 +40,6 @@ export default {
           matched = [{ path: '/index', name: '首页'}].concat(matched)
         }
       }
-      
       this.levelList = matched.filter(item => item)
     },
   }

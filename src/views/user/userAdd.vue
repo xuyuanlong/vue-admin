@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
      <el-form-item label="姓名" prop="name">
         <el-input v-model="ruleForm.name" autocomplete="off"></el-input>

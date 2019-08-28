@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
       <el-form :inline="true" :model="query" class="demo-form-inline">
   <el-form-item label="姓名/手机">
     <el-input v-model="query.user" placeholder="姓名或手机号"></el-input>

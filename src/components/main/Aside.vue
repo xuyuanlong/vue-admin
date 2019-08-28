@@ -1,19 +1,23 @@
 <template>
   <el-menu
-    class="el-menu-vertical-demo main-menu"  @open="handleOpen" @close="handleClose" :collapse="slideOpen">
-      <el-submenu :index="item.name" :key="item.name" v-for="item in navListFilter">
+    class="el-menu-vertical-demo main-menu"  @open="handleOpen" @close="handleClose" :collapse="slideOpen" background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+      <template v-for="item in navList">
+        <el-submenu v-if="item.path" :index="item.code"  >
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>{{item.name}}</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item @click="toMain(item2.path)" :key="item2.name" v-for="item2 in item.children" :index="item2.name">{{item2.name}}</el-menu-item>
+          <el-menu-item @click="toMain(itemSub.path)" v-for="itemSub in item.children" :index="itemSub.code">{{itemSub.name}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item v-for="item in navListFilter" :key="item.children[0].name"  @click="toMain(item.children[0].path)" :index="item.children[0].name">
+      <el-menu-item v-else @click="toMain(item.children[0].path)" :index="item.children[0].code">
         <i class="el-icon-menu"></i>
         <span slot="title">{{item.children[0].name}}</span>
       </el-menu-item>
+      </template>
   </el-menu>
 </template>
 
@@ -44,6 +48,7 @@ export default {
     })
   },
   mounted() {
+    console.log(this.navListFilter)
   },
   methods: {
     handleOpen(key, keyPath) {

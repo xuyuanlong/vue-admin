@@ -7,6 +7,7 @@ import axios from 'axios'
 import { Loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import Main from './components/main/index.vue'
+import '@/assets/app.css';
 
 
 Vue.config.productionTip = false

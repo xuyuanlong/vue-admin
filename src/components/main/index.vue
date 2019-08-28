@@ -43,19 +43,18 @@ export default {
 </script>
 <style >
   .el-header {
-    padding:0 !important
+    padding:0 !important;
   }
   .bread {
     position: fixed;
+    padding:10px 0;
     top:60px;
     width: 100%;
     z-index: 999;
-    padding: 15px 0;
     text-align: left;
     background: #eee;
   }
   .el-main {
-    padding: 0 20px !important;
     background: #eee;
   }
 </style>
