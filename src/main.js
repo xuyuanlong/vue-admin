@@ -6,6 +6,14 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 import { Loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+
+import $ from 'jquery'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'bootstrap-table/dist/bootstrap-table.min.css'
+import 'bootstrap-table/dist/bootstrap-table.min.js'
+import 'bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js'
+
 import Main from './components/main/index.vue'
 import '@/assets/app.css';
 

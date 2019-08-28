@@ -1,9 +1,9 @@
 <template>
   <el-menu
-    class="el-menu-vertical-demo main-menu"  @open="handleOpen" @close="handleClose" :collapse="slideOpen" background-color="#545c64"
+    class="el-menu-vertical-demo main-menu" :collapse="slideOpen" background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <template v-for="item in navList">
+      <div v-for="item in navList" :keys="item.code">
         <el-submenu v-if="item.path" :index="item.code"  >
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -17,7 +17,7 @@
         <i class="el-icon-menu"></i>
         <span slot="title">{{item.children[0].name}}</span>
       </el-menu-item>
-      </template>
+      </div>
   </el-menu>
 </template>
 
@@ -27,36 +27,17 @@ import { mapState } from 'vuex'
 import { log } from 'util';
 export default {
   data(){
-    return{
-      
-    }
+    return{}
   },
   computed:{
-    navListFilter: function() {
-      return this.navList.filter(function(item) {
-        return item.children && item.name
-      })
-    },
-    navListFilter2:function() {
-      return this.navList.filter(function(item) {
-        return !item.children ||  !item.name
-      })
-    },
     ...mapState({
       navList: state => state.navList,
       slideOpen: state => state.slideOpen
     })
   },
   mounted() {
-    console.log(this.navListFilter)
   },
   methods: {
-    handleOpen(key, keyPath) {
-      // console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      // console.log(key, keyPath);
-    },
     toMain(path) {
       this.$router.push(path)
     }

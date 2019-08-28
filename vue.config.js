@@ -1,4 +1,6 @@
 const name = 'vue Admin' // page title
+
+const webpack = require('webpack')
 module.exports = {
   lintOnSave:false,   //取消编译代码格式校验
   devServer: {
@@ -32,8 +34,13 @@ module.exports = {
       assetFilter: function(assetFilename) {
         return assetFilename.endsWith('.js');
       }
-    }
-
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        $:"jquery",
+        jQuery:"jquery",
+        "windows.jQuery":"jquery"
+      })
+    ]
   }
-
 }
